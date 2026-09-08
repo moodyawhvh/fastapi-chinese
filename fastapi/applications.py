@@ -36,7 +36,7 @@ from starlette.routing import BaseRoute
 from starlette.types import ASGIApp, ExceptionHandler, Lifespan, Receive, Scope, Send
 from typing_extensions import deprecated
 
-AppType = TypeVar("AppType", bound="FastAPI")
+AppType = TypeVar("AppType", bound="FastAPI")  # 类型变量:让 FastAPI() 子类的方法返回值保持子类类型
 
 
 class FastAPI(Starlette):
@@ -1017,6 +1017,8 @@ class FastAPI(Starlette):
         self.middleware_stack: ASGIApp | None = None
         self.setup()
 
+    # 构建中间件栈:重写 Starlette 的同名方法,目的是把 AsyncExitStackMiddleware
+    # 插入到 ExceptionMiddleware 之内、用户自定义中间件之内,保证依赖的退出栈在正确的位置生效
     def build_middleware_stack(self) -> ASGIApp:
         # Duplicate/override from Starlette to add AsyncExitStackMiddleware
         # inside of ExceptionMiddleware, inside of custom user middlewares
@@ -1067,6 +1069,8 @@ class FastAPI(Starlette):
             app = cls(app, *args, **kwargs)
         return app
 
+    # 生成应用的 OpenAPI 模式:首次调用后缓存到 app.openapi_schema,之后直接复用缓存结果
+    # 需要自定义文档时,可以覆盖或后处理这个 schema
     def openapi(self) -> dict[str, Any]:
         """
         Generate the OpenAPI schema of the application. This is called by FastAPI
@@ -1102,6 +1106,8 @@ class FastAPI(Starlette):
             self._openapi_routes_version = routes_version
         return self.openapi_schema
 
+    # 初始化基础配置:注册 OpenAPI(/openapi.json)、Swagger UI(/docs)、ReDoc(/redoc)
+    # 等文档相关路由,以及默认异常处理中间件
     def setup(self) -> None:
         if self.openapi_url:
 
@@ -1157,11 +1163,13 @@ class FastAPI(Starlette):
 
             self.add_route(self.redoc_url, redoc_html, include_in_schema=False)
 
+    # ASGI 入口:每个请求进来时先处理 root_path(反向代理挂载路径),再交给 Starlette 主流程
     async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
         if self.root_path:
             scope["root_path"] = self.root_path
         await super().__call__(scope, receive, send)
 
+    # 注册一条 API 路由(路径操作装饰器最终都会走到这里)
     def add_api_route(
         self,
         path: str,
@@ -1643,6 +1651,7 @@ class FastAPI(Starlette):
             generate_unique_id_function=generate_unique_id_function,
         )
 
+    # HTTP GET:声明一个 GET *路径操作*,常用于读取数据;这是 app.get() 装饰器定义处
     def get(
         self,
         path: Annotated[
