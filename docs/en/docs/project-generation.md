@@ -1,28 +1,30 @@
-# Full Stack FastAPI Template { #full-stack-fastapi-template }
+> 🌐 本文档由 [fastapi/fastapi](https://github.com/fastapi/fastapi) 翻译,英文原版见原项目。
 
-Templates, while they typically come with a specific setup, are designed to be flexible and customizable. This allows you to modify and adapt them to your project's requirements, making them an excellent starting point. 🏁
+# 全栈 FastAPI 模板 { #full-stack-fastapi-template }
 
-You can use this template to get started, as it includes a lot of the initial setup, security, database and some API endpoints already done for you.
+模板虽然通常自带一套特定配置,但其设计目标是灵活、可定制。你可以修改和调整它以满足项目需求,因此它是非常好的起点。🏁
 
-GitHub Repository: [Full Stack FastAPI Template](https://github.com/fastapi/full-stack-fastapi-template)
+你可以直接用这个模板起步,它已经替你完成了大量初始配置、安全设置、数据库以及一些 API 端点。
 
-## Full Stack FastAPI Template - Technology Stack and Features { #full-stack-fastapi-template-technology-stack-and-features }
+GitHub 仓库:[Full Stack FastAPI Template](https://github.com/fastapi/full-stack-fastapi-template)
 
-- ⚡ [**FastAPI**](https://fastapi.tiangolo.com) for the Python backend API.
-  - 🧰 [SQLModel](https://sqlmodel.tiangolo.com) for the Python SQL database interactions (ORM).
-  - 🔍 [Pydantic](https://pydantic.dev/docs/), used by FastAPI, for the data validation and settings management.
-  - 💾 [PostgreSQL](https://www.postgresql.org) as the SQL database.
-- 🚀 [React](https://react.dev) for the frontend.
-  - 💃 Using TypeScript, hooks, Vite, and other parts of a modern frontend stack.
-  - 🎨 [Tailwind CSS](https://tailwindcss.com) and [shadcn/ui](https://ui.shadcn.com) for the frontend components.
-  - 🤖 An automatically generated frontend client.
-  - 🧪 [Playwright](https://playwright.dev) for End-to-End testing.
-  - 🦇 Dark mode support.
-- 🐋 [Docker Compose](https://www.docker.com) for development and production.
-- 🔒 Secure password hashing by default.
-- 🔑 JWT (JSON Web Token) authentication.
-- 📫 Email based password recovery.
-- ✅ Tests with [Pytest](https://pytest.org).
-- 📞 [Traefik](https://traefik.io) as a reverse proxy / load balancer.
-- 🚢 Deployment instructions using Docker Compose, including how to set up a frontend Traefik proxy to handle automatic HTTPS certificates.
-- 🏭 CI (continuous integration) and CD (continuous deployment) based on GitHub Actions.
+## 全栈 FastAPI 模板 - 技术栈与特性 { #full-stack-fastapi-template-technology-stack-and-features }
+
+- ⚡ [**FastAPI**](https://fastapi.tiangolo.com) 作为 Python 后端 API。
+  - 🧰 [SQLModel](https://sqlmodel.tiangolo.com) 负责 Python 与 SQL 数据库的交互(ORM)。
+  - 🔍 [Pydantic](https://pydantic.dev/docs/)(FastAPI 所使用)负责数据校验和配置管理。
+  - 💾 [PostgreSQL](https://www.postgresql.org) 作为 SQL 数据库。
+- 🚀 [React](https://react.dev) 作为前端。
+  - 💃 使用 TypeScript、hooks、Vite 等现代前端技术栈。
+  - 🎨 [Tailwind CSS](https://tailwindcss.com) 和 [shadcn/ui](https://ui.shadcn.com) 构建前端组件。
+  - 🤖 自动生成的前端客户端。
+  - 🧪 [Playwright](https://playwright.dev) 做端到端测试。
+  - 🦇 支持暗色模式。
+- 🐋 [Docker Compose](https://www.docker.com) 覆盖开发与生产环境。
+- 🔒 默认安全的密码哈希。
+- 🔑 JWT(JSON Web Token)认证。
+- 📫 基于邮件的密码找回。
+- ✅ 使用 [Pytest](https://pytest.org) 的测试。
+- 📞 [Traefik](https://traefik.io) 作为反向代理 / 负载均衡器。
+- 🚢 基于 Docker Compose 的部署说明,包括如何配置前端 Traefik 代理来自动处理 HTTPS 证书。
+- 🏭 基于 GitHub Actions 的 CI(持续集成)与 CD(持续部署)。

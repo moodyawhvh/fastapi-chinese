@@ -1,79 +1,81 @@
-# History, Design and Future { #history-design-and-future }
+> 🌐 本文档由 [fastapi/fastapi](https://github.com/fastapi/fastapi) 翻译,英文原版见原项目。
 
-Some time ago, [a **FastAPI** user asked](https://github.com/fastapi/fastapi/issues/3#issuecomment-454956920):
+# 历史、设计与未来 { #history-design-and-future }
 
-> What’s the history of this project? It seems to have come from nowhere to awesome in a few weeks [...]
+不久前,[一位 **FastAPI** 用户问道](https://github.com/fastapi/fastapi/issues/3#issuecomment-454956920):
 
-Here's a little bit of that history.
+> 这个项目的历史是什么?感觉它好像几周之内就从无名之辈变成了神器 [...]
 
-## Alternatives { #alternatives }
+下面就是这段历史的一小部分。
 
-I have been creating APIs with complex requirements for several years (Machine Learning, distributed systems, asynchronous jobs, NoSQL databases, etc), leading several teams of developers.
+## 备选方案 { #alternatives }
 
-As part of that, I needed to investigate, test and use many alternatives.
+我曾多年带领多个开发团队,构建需求复杂的 API(机器学习、分布式系统、异步任务、NoSQL 数据库等等)。
 
-The history of **FastAPI** is in great part the history of its predecessors.
+在这个过程中,我需要调研、测试并使用大量的备选方案。
 
-As said in the section [Alternatives](alternatives.md):
+**FastAPI** 的历史,在很大程度上就是它的那些前身的历史。
+
+正如[备选方案](alternatives.md)一节所说:
 
 <blockquote markdown="1">
 
-**FastAPI** wouldn't exist if not for the previous work of others.
+如果没有前人的工作,**FastAPI** 根本不会存在。
 
-There have been many tools created before that have helped inspire its creation.
+在它之前诞生了许多工具,为它的创造提供了灵感。
 
-I have been avoiding the creation of a new framework for several years. First I tried to solve all the features covered by **FastAPI** using many different frameworks, plug-ins, and tools.
+好几年里我都尽量避免再造一个新框架。一开始,我尝试用各种不同的框架、插件和工具来解决 **FastAPI** 覆盖的所有功能。
 
-But at some point, there was no other option than creating something that provided all these features, taking the best ideas from previous tools, and combining them in the best way possible, using language features that weren't even available before (Python 3.6+ type hints).
+但到了某个时点,除了造一个能提供所有这些功能的东西之外,已别无选择——取各家工具最好的想法,用最好的方式把它们组合起来,并利用此前语言层面还不具备的特性(Python 3.6+ 类型提示)。
 
 </blockquote>
 
-## Investigation { #investigation }
+## 调研 { #investigation }
 
-By using all the previous alternatives I had the chance to learn from all of them, take ideas, and combine them in the best way I could find for myself and the teams of developers I have worked with.
+通过使用上面这些备选方案,我有机会从每一种里学习,汲取想法,并以我能找到的最佳方式为我自己和我带过的开发团队把它们组合起来。
 
-For example, it was clear that ideally it should be based on standard Python type hints.
+例如,有一点很明确:理想情况下它应该基于标准的 Python 类型提示。
 
-Also, the best approach was to use already existing standards.
+另外,最好的做法是复用已有的标准。
 
-So, before even starting to code **FastAPI**, I spent several months studying the specs for OpenAPI, JSON Schema, OAuth2, etc. Understanding their relationship, overlap, and differences.
+于是,在动手写 **FastAPI** 之前,我花了几个月研究 OpenAPI、JSON Schema、OAuth2 等规范,弄清它们之间的关系、重叠与差异。
 
-## Design { #design }
+## 设计 { #design }
 
-Then I spent some time designing the developer "API" I wanted to have as a user (as a developer using FastAPI).
+接着,我花了一些时间设计我自己作为用户(使用 FastAPI 的开发者)想要的那种开发者 "API"。
 
-I tested several ideas in the most popular Python editors: PyCharm, VS Code, Jedi based editors.
+我在最流行的几个 Python 编辑器里测试了多种设想:PyCharm、VS Code、基于 Jedi 的编辑器。
 
-By the last [Python Developer Survey](https://www.jetbrains.com/research/python-developers-survey-2018/#development-tools), that covers about 80% of the users.
+依据上一次 [Python 开发者调查](https://www.jetbrains.com/research/python-developers-survey-2018/#development-tools),这些编辑器覆盖了大约 80% 的用户。
 
-It means that **FastAPI** was specifically tested with the editors used by 80% of the Python developers. And as most of the other editors tend to work similarly, all its benefits should work for virtually all editors.
+这意味着 **FastAPI** 专门在 80% 的 Python 开发者所用的编辑器中做过测试。而其他大多数编辑器的行为都与之类似,所以它的种种好处几乎对所有编辑器都成立。
 
-That way I could find the best ways to reduce code duplication as much as possible, to have completion everywhere, type and error checks, etc.
+这样我就能找到最佳方式,尽可能减少代码重复,让补全无处不在,让类型检查和错误检查处处生效,等等。
 
-All in a way that provided the best development experience for all the developers.
+一切设计都为了让所有开发者获得最好的开发体验。
 
-## Requirements { #requirements }
+## 需求选型 { #requirements }
 
-After testing several alternatives, I decided that I was going to use [**Pydantic**](https://pydantic.dev/docs/) for its advantages.
+测试了多个备选方案后,我决定使用 [**Pydantic**](https://pydantic.dev/docs/),因为它优势明显。
 
-Then I contributed to it, to make it fully compliant with JSON Schema, to support different ways to define constraint declarations, and to improve editor support (type checks, autocompletion) based on the tests in several editors.
+随后我还向它贡献代码,使其完全兼容 JSON Schema,支持多种约束声明方式,并基于在多个编辑器中的测试改进编辑器支持(类型检查、自动补全)。
 
-During the development, I also contributed to [**Starlette**](https://starlette.dev/), the other key requirement.
+在开发过程中,我也向另一个关键依赖 [**Starlette**](https://starlette.dev/) 贡献了代码。
 
-## Development { #development }
+## 开发 { #development }
 
-By the time I started creating **FastAPI** itself, most of the pieces were already in place, the design was defined, the requirements and tools were ready, and the knowledge about the standards and specifications was clear and fresh.
+等我真正开始创建 **FastAPI** 本身时,大部分拼图已经就位:设计已定,需求和工具就绪,对标准和规范的理解也清晰而新鲜。
 
-## Future { #future }
+## 未来 { #future }
 
-By this point, it's already clear that **FastAPI** with its ideas is being useful for many people.
+到今天,带着这些理念的 **FastAPI** 已然帮到了很多人。
 
-It is being chosen over previous alternatives for suiting many use cases better.
+它因为在许多用例中更贴合需求,而被人们选来取代之前的那些备选方案。
 
-Many developers and teams already depend on **FastAPI** for their projects (including me and my team).
+很多开发者和团队的项目已经依赖 **FastAPI**(包括我和我的团队)。
 
-But still, there are many improvements and features to come.
+不过,还有大量改进和新功能在路上。
 
-**FastAPI** has a great future ahead.
+**FastAPI** 的前途一片光明。
 
-And [your help](help-fastapi.md) is greatly appreciated.
+当然,[你的帮助](help-fastapi.md)将不胜感激。
