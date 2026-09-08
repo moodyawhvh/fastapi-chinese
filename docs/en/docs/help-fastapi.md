@@ -1,79 +1,81 @@
-# Help { #help }
+> 🌐 本文档由 [fastapi/fastapi](https://github.com/fastapi/fastapi) 翻译,英文原版见原项目。
 
-Would you like to help FastAPI or get help about FastAPI?
+# 帮助 { #help }
 
-There are very simple ways to help and get help.
+你想帮助 FastAPI,或者想获取 FastAPI 相关的帮助?
 
-## Subscribe to the newsletter { #subscribe-to-the-newsletter }
+帮助别人和获得帮助都有非常简单的方式。
 
-You can subscribe to the (infrequent) [**FastAPI and friends** newsletter](newsletter.md) to stay updated about:
+## 订阅邮件通讯 { #subscribe-to-the-newsletter }
 
-* News about FastAPI and friends 🚀
-* Guides 📝
-* Features ✨
-* Breaking changes 🚨
-* Tips and tricks ✅
+你可以订阅(不太频繁的)[**FastAPI and friends** 邮件通讯](newsletter.md),及时了解:
 
-## Follow FastAPI online { #follow-fastapi-online }
+* FastAPI 及周边生态的新闻 🚀
+* 指南 📝
+* 新功能 ✨
+* 破坏性变更 🚨
+* 技巧与诀窍 ✅
 
-You can follow **FastAPI** online in several places:
+## 在网上关注 FastAPI { #follow-fastapi-online }
 
-* [@fastapi on **X / Twitter**](https://x.com/fastapi)
-* [@fastapi.tiangolo.com on **Bluesky**](https://bsky.app/profile/fastapi.tiangolo.com)
-* [FastAPI on **LinkedIn**](https://www.linkedin.com/company/fastapi/)
+你可以在以下几个地方在线关注 **FastAPI**:
 
-## Star **FastAPI** in GitHub { #star-fastapi-in-github }
+* [**X / Twitter** 上的 @fastapi](https://x.com/fastapi)
+* [**Bluesky** 上的 @fastapi.tiangolo.com](https://bsky.app/profile/fastapi.tiangolo.com)
+* [**LinkedIn** 上的 FastAPI](https://www.linkedin.com/company/fastapi/)
 
-You can "star" FastAPI in GitHub (clicking the star button at the top right): [https://github.com/fastapi/fastapi](https://github.com/fastapi/fastapi). ⭐️
+## 在 GitHub 上给 **FastAPI** 点 Star { #star-fastapi-in-github }
 
-By adding a star, other users will be able to find it more easily and see that it has already been useful for others.
+你可以在 GitHub 上给 FastAPI "点星"(点击右上角的 star 按钮):[https://github.com/fastapi/fastapi](https://github.com/fastapi/fastapi)。⭐️
 
-## Watch the GitHub repository for releases { #watch-the-github-repository-for-releases }
+点一个 star,其他用户就更容易找到它,也能看到它已经帮到过很多人。
 
-You can "watch" FastAPI in GitHub (clicking the "watch" button at the top right): [https://github.com/fastapi/fastapi](https://github.com/fastapi/fastapi). 👀
+## Watch GitHub 仓库以关注发版 { #watch-the-github-repository-for-releases }
 
-There you can select "Releases only".
+你可以在 GitHub 上 "watch" FastAPI(点击右上角的 "watch" 按钮):[https://github.com/fastapi/fastapi](https://github.com/fastapi/fastapi)。👀
 
-By doing it, you will receive notifications (in your email) whenever there's a new release (a new version) of **FastAPI** with bug fixes and new features.
+在那里可以选择 "Releases only"(仅关注发版)。
 
-## Follow the author { #follow-the-author }
+这样一来,每当 **FastAPI** 发布包含 bug 修复和新功能的新版本,你都会收到(邮件)通知。
 
-You can follow [me (Sebastián Ramírez / `tiangolo`)](https://tiangolo.com), the author in a few places, to hear when I have news to share about FastAPI and friends:
+## 关注作者 { #follow-the-author }
 
-* [@tiangolo on **GitHub**](https://github.com/tiangolo).
-* [@tiangolo on **X (Twitter)**](https://x.com/tiangolo)
-* [@tiangolo.com on **Bluesky**](https://bsky.app/profile/tiangolo.com)
-* [@tiangolo on **LinkedIn**](https://www.linkedin.com/in/tiangolo/).
+你可以在以下几个地方关注作者 [我(Sebastián Ramírez / `tiangolo`)](https://tiangolo.com),第一时间听到关于 FastAPI 及周边生态的消息:
 
-## Ask Questions { #ask-questions }
+* [**GitHub** 上的 @tiangolo](https://github.com/tiangolo)。
+* [**X (Twitter)** 上的 @tiangolo](https://x.com/tiangolo)
+* [**Bluesky** 上的 @tiangolo.com](https://bsky.app/profile/tiangolo.com)
+* [**LinkedIn** 上的 @tiangolo](https://www.linkedin.com/in/tiangolo/)。
 
-You can [create a new question](https://github.com/fastapi/fastapi/discussions/new?category=questions) in the GitHub repository, for example to:
+## 提问 { #ask-questions }
 
-* Ask a **question** or ask about a **problem**.
-* Suggest a new **feature**.
+你可以在 GitHub 仓库里[创建一个新问题](https://github.com/fastapi/fastapi/discussions/new?category=questions),比如:
 
-## Join the Chat { #join-the-chat }
+* 提**问题**或反馈**故障**。
+* 建议一个新**功能**。
 
-Join the 👥 [Discord chat server](https://discord.com/invite/VQjSZaeJmf) 👥 and hang out with others in the FastAPI community.
+## 加入聊天 { #join-the-chat }
+
+加入 👥 [Discord 聊天服务器](https://discord.com/invite/VQjSZaeJmf) 👥,和 FastAPI 社区的其他人一起交流。
 
 /// tip
 
-For questions, ask them in GitHub Discussions, there's a much better chance you will receive help.
+有问题请到 GitHub Discussions 提问,在那里获得帮助的概率大得多。
 
-Use the chat only for other general conversations.
+聊天频道只用于其他一般性闲聊。
 
 ///
 
-### Don't use the Chat for Questions { #dont-use-the-chat-for-questions }
+### 不要在聊天里提问 { #dont-use-the-chat-for-questions }
 
-Keep in mind that as chats allow more "free conversation", it's easy to ask questions that are too general and more difficult to answer, so, you might not receive answers.
+记住,聊天允许更"自由地聊",问题很容易问得过于宽泛、难以回答,结果可能根本没人回答你。
 
-In GitHub, the template will guide you to write the right question so that you can more easily get a good answer, or even solve the problem yourself even before asking.
+在 GitHub 上,模板会引导你把问题写清楚,让你更容易得到好答案,甚至可能在提问之前自己就把问题解决了。
 
-Conversations in the chat systems are also not as easily searchable as in GitHub, they get lost.
+聊天系统里的对话也不像 GitHub 那样容易被检索到,很快就会淹没在历史消息里。
 
-## Try FastAPI Cloud { #try-fastapi-cloud }
+## 试试 FastAPI Cloud { #try-fastapi-cloud }
 
-The main funding for FastAPI and friends comes from [**FastAPI Cloud**](https://fastapicloud.com), a platform to deploy FastAPI applications in a simple and fast way, with a single command, `fastapi deploy`.
+FastAPI 及周边生态的主要资金来源是 [**FastAPI Cloud**](https://fastapicloud.com),一个用一条命令 `fastapi deploy` 就能简单快速部署 FastAPI 应用的平台。
 
-FastAPI Cloud is built by the same team behind FastAPI. You can try it and consider it for your projects.
+FastAPI Cloud 由 FastAPI 背后的同一支团队打造。你可以试用一下,并考虑把它用于你的项目。
