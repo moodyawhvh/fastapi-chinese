@@ -1,132 +1,124 @@
-# Python Types Intro { #python-types-intro }
+> 🌐 本文档由 [fastapi/fastapi](https://github.com/fastapi/fastapi) 翻译,英文原版见原项目。
+>
+> ⚠️ 说明:本文档篇幅较长(超过 10000 字符),按汉化预算仅翻译核心章节;其余细节请参阅英文原版。
 
-Python has support for optional "type hints" (also called "type annotations").
+# Python 类型入门 { #python-types-intro }
 
-These **"type hints"** or annotations are a special syntax that allows declaring the <dfn title="for example: str, int, float, bool">type</dfn> of a variable.
+Python 支持可选的"类型提示"(也叫"类型注解")。
 
-By declaring types for your variables, editors and tools can give you better support.
+这些**"类型提示"**或注解是一种特殊语法,用来声明变量的<dfn title="例如: str, int, float, bool">类型</dfn>。
 
-This is just a **quick tutorial / refresher** about Python type hints. It covers only the minimum necessary to use them with **FastAPI**... which is actually very little.
+为变量声明类型后,编辑器和工具就能给你更好的支持。
 
-**FastAPI** is all based on these type hints, they give it many advantages and benefits.
+这只是一份关于 Python 类型提示的**快速教程 / 复习**,只覆盖配合 **FastAPI** 使用所需的最少知识……实际上真的很少。
 
-But even if you never use **FastAPI**, you would benefit from learning a bit about them.
+**FastAPI** 完全建立在这些类型提示之上,它们带来了大量优势。
+
+但即使你从不使用 **FastAPI**,学一点类型提示也会让你受益。
 
 /// note
 
-If you are a Python expert, and you already know everything about type hints, skip to the next chapter.
+如果你是 Python 专家,已经完全掌握类型提示,可以直接跳到下一章。
 
 ///
 
-## Motivation { #motivation }
+## 动机 { #motivation }
 
-Let's start with a simple example:
+从一个简单的例子开始:
 
 {* ../../docs_src/python_types/tutorial001_py310.py *}
 
-Calling this program outputs:
+运行这个程序会输出:
 
 ```
 John Doe
 ```
 
-The function does the following:
+这个函数做了以下事情:
 
-* Takes a `first_name` and `last_name`.
-* Converts the first letter of each one to upper case with `title()`.
-* <dfn title="Puts them together, as one. With the contents of one after the other.">Concatenates</dfn> them with a space in the middle.
+* 接收 `first_name` 和 `last_name`。
+* 用 `title()` 把两者首字母转为大写。
+* <dfn title="Puts them together, as one. With the contents of one after the other.">拼接</dfn>两个字符串,中间用空格分隔。
 
 {* ../../docs_src/python_types/tutorial001_py310.py hl[2] *}
 
-### Edit it { #edit-it }
+### 修改它 { #edit-it }
 
-It's a very simple program.
+程序很简单。但想象一下你正在从头写它。
 
-But now imagine that you were writing it from scratch.
+写到一半定义函数,参数准备好了……
 
-At some point you start defining the function, and you have the parameters ready...
+接着要调用"那个把首字母转大写的方法"。
 
-But then you have to call "that method that converts the first letter to upper case".
+是 `upper`?`uppercase`?`first_uppercase`?还是 `capitalize`?
 
-Was it `upper`? Was it `uppercase`? `first_uppercase`? `capitalize`?
+这时你请出程序员的老朋友:编辑器自动补全。
 
-Then, you try with the old programmer's friend, editor autocompletion.
+输入函数第一个参数 `first_name`,敲一个点(`.`),再按 `Ctrl+Space` 触发补全。
 
-You type the first parameter of the function, `first_name`, then a dot (`.`) and then hit `Ctrl+Space` to trigger the completion.
-
-But, sadly, you get nothing useful:
+遗憾的是,你什么都得不到:
 
 <img src="/img/python-types/image01.png">
 
-### Add types { #add-types }
+### 加上类型 { #add-types }
 
-Let's modify a single line from the previous version.
-
-We will change exactly this fragment, the parameters of the function, from:
+只改一行。把函数参数从:
 
 ```Python
     first_name, last_name
 ```
 
-to:
+改成:
 
 ```Python
     first_name: str, last_name: str
 ```
 
-That's it.
-
-Those are the "type hints":
+就这样。这些就是"类型提示":
 
 {* ../../docs_src/python_types/tutorial002_py310.py hl[1] *}
 
-That is not the same as declaring default values like it would be with:
+注意,这和声明默认值不一样:
 
 ```Python
     first_name="john", last_name="doe"
 ```
 
-It's a different thing.
+这是两回事。我们用的是冒号(`:`),不是等号(`=`)。
 
-We are using colons (`:`), not equals (`=`).
+加上类型提示通常不会改变程序的行为。
 
-And adding type hints normally doesn't change what happens from what would happen without them.
-
-But now, imagine you are again in the middle of creating that function, but with type hints.
-
-At the same point, you try to trigger the autocomplete with `Ctrl+Space` and you see:
+但现在再想象你在写那个函数,这次带着类型提示。同样位置按 `Ctrl+Space`,你会看到:
 
 <img src="/img/python-types/image02.png">
 
-With that, you can scroll, seeing the options, until you find the one that "rings a bell":
+于是可以滚动浏览候选,直到找到那个"眼熟"的:
 
 <img src="/img/python-types/image03.png">
 
-## More motivation { #more-motivation }
+## 更多的动机 { #more-motivation }
 
-Check this function, it already has type hints:
+看这个已经带了类型提示的函数:
 
 {* ../../docs_src/python_types/tutorial003_py310.py hl[1] *}
 
-Because the editor knows the types of the variables, you don't only get completion, you also get error checks:
+因为编辑器知道变量的类型,你不仅获得补全,还获得错误检查:
 
 <img src="/img/python-types/image04.png">
 
-Now you know that you have to fix it, convert `age` to a string with `str(age)`:
+现在你知道必须修复它,用 `str(age)` 把 `age` 转成字符串:
 
 {* ../../docs_src/python_types/tutorial004_py310.py hl[2] *}
 
-## Declaring types { #declaring-types }
+## 声明类型 { #declaring-types }
 
-You just saw the main place to declare type hints. As function parameters.
+你已经看到了声明类型提示的主要位置:函数参数。
 
-This is also the main place you would use them with **FastAPI**.
+这也是在 **FastAPI** 中使用它们的主要位置。
 
-### Simple types { #simple-types }
+### 简单类型 { #simple-types }
 
-You can declare all the standard Python types, not only `str`.
-
-You can use, for example:
+你可以声明所有标准 Python 类型,不只是 `str`。例如:
 
 * `int`
 * `float`
@@ -135,9 +127,9 @@ You can use, for example:
 
 {* ../../docs_src/python_types/tutorial005_py310.py hl[1] *}
 
-### `typing` module { #typing-module }
+### `typing` 模块 { #typing-module }
 
-For some additional use cases, you might need to import some things from the standard library `typing` module, for example when you want to declare that something has "any type", you can use `Any` from `typing`:
+某些场景下,你可能需要从标准库 `typing` 模块导入一些东西。比如想声明"任意类型"时,可以使用 `typing` 的 `Any`:
 
 ```python
 from typing import Any
@@ -147,13 +139,13 @@ def some_function(data: Any):
     print(data)
 ```
 
-### Generic types { #generic-types }
+### 泛型类型 { #generic-types }
 
-Some types can take "type parameters" in square brackets, to define their internal types, for example a "list of strings" would be declared `list[str]`.
+有些类型可以在方括号里接收"类型参数"来定义其内部类型,例如"字符串列表"声明为 `list[str]`。
 
-These types that can take type parameters are called **Generic types** or **Generics**.
+这种能接收类型参数的类型叫**泛型类型(Generic types)**或**泛型(Generics)**。
 
-You can use the same builtin types as generics (with square brackets and types inside):
+以下内置类型都可以当泛型用(方括号里放类型):
 
 * `list`
 * `tuple`
@@ -162,80 +154,68 @@ You can use the same builtin types as generics (with square brackets and types i
 
 #### List { #list }
 
-For example, let's define a variable to be a `list` of `str`.
-
-Declare the variable, with the same colon (`:`) syntax.
-
-As the type, put `list`.
-
-As the list is a type that contains some internal types, you put them in square brackets:
+例如定义一个变量为 `str` 组成的 `list`。用同样的冒号(`:`)语法声明变量,类型写 `list`,因为 list 是包含内部类型的类型,所以把内部类型放进方括号:
 
 {* ../../docs_src/python_types/tutorial006_py310.py hl[1] *}
 
 /// note
 
-Those internal types in the square brackets are called "type parameters".
+方括号里的那些内部类型叫"类型参数"。
 
-In this case, `str` is the type parameter passed to `list`.
+本例中,`str` 是传给 `list` 的类型参数。
 
 ///
 
-That means: "the variable `items` is a `list`, and each of the items in this list is a `str`".
+这意味着:"变量 `items` 是一个 `list`,列表中的每一项都是 `str`"。
 
-By doing that, your editor can provide support even while processing items from the list:
+这样一来,即使在遍历列表元素时,编辑器也能提供支持:
 
 <img src="/img/python-types/image05.png">
 
-Without types, that's almost impossible to achieve.
+没有类型注解,这几乎不可能做到。
 
-Notice that the variable `item` is one of the elements in the list `items`.
+注意变量 `item` 是列表 `items` 中的一个元素,编辑器仍然知道它是 `str`,并据此提供支持。
 
-And still, the editor knows it is a `str`, and provides support for that.
+#### Tuple 和 Set { #tuple-and-set }
 
-#### Tuple and Set { #tuple-and-set }
-
-You would do the same to declare `tuple`s and `set`s:
+声明 `tuple` 和 `set` 也是同样的做法:
 
 {* ../../docs_src/python_types/tutorial007_py310.py hl[1] *}
 
-This means:
+这表示:
 
-* The variable `items_t` is a `tuple` with 3 items, an `int`, another `int`, and a `str`.
-* The variable `items_s` is a `set`, and each of its items is of type `bytes`.
+* 变量 `items_t` 是一个有 3 个元素的 `tuple`:一个 `int`、另一个 `int`、一个 `str`。
+* 变量 `items_s` 是一个 `set`,其每个元素都是 `bytes` 类型。
 
 #### Dict { #dict }
 
-To define a `dict`, you pass 2 type parameters, separated by commas.
-
-The first type parameter is for the keys of the `dict`.
-
-The second type parameter is for the values of the `dict`:
+定义 `dict` 时传入 2 个类型参数,用逗号分隔。第一个对应 `dict` 的键,第二个对应 `dict` 的值:
 
 {* ../../docs_src/python_types/tutorial008_py310.py hl[1] *}
 
-This means:
+这表示:
 
-* The variable `prices` is a `dict`:
-    * The keys of this `dict` are of type `str` (let's say, the name of each item).
-    * The values of this `dict` are of type `float` (let's say, the price of each item).
+* 变量 `prices` 是一个 `dict`:
+    * 键的类型是 `str`(比如每种商品的名字)。
+    * 值的类型是 `float`(比如每种商品的价格)。
 
 #### Union { #union }
 
-You can declare that a variable can be any of **several types**, for example, an `int` or a `str`.
+你可以声明一个变量可以是**几种类型**之一,比如 `int` 或 `str`。
 
-To define it you use the <dfn title='also called "bitwise or operator", but that meaning is not relevant here'>vertical bar (`|`)</dfn> to separate both types.
+用<dfn title='also called "bitwise or operator", but that meaning is not relevant here'>竖线(`|`)</dfn>分隔两个类型即可。
 
-This is called a "union", because the variable can be anything in the union of those two sets of types.
+这叫"联合(union)",因为变量可以取这两组类型并集中的任何值。
 
 ```Python hl_lines="1"
 {!> ../../docs_src/python_types/tutorial008b_py310.py!}
 ```
 
-This means that `item` could be an `int` or a `str`.
+也就是说 `item` 可以是 `int` 也可以是 `str`。
 
-#### Possibly `None` { #possibly-none }
+#### 可能为 `None` { #possibly-none }
 
-You can declare that a value could have a type, like `str`, but that it could also be `None`.
+你还可以声明一个值可以是某个类型(比如 `str`),但也可以是 `None`。
 
 //// tab | Python 3.10+
 
@@ -245,104 +225,100 @@ You can declare that a value could have a type, like `str`, but that it could al
 
 ////
 
-Using `str | None` instead of just `str` will let the editor help you detect errors where you could be assuming that a value is always a `str`, when it could actually be `None` too.
+用 `str | None` 而不是只写 `str`,编辑器就能帮你发现这类错误:你默认值永远是 `str`,而它实际上还可能是 `None`。
 
-### Classes as types { #classes-as-types }
+### 类作为类型 { #classes-as-types }
 
-You can also declare a class as the type of a variable.
+你也可以把一个类声明为变量的类型。
 
-Let's say you have a class `Person`, with a name:
+假设有一个 `Person` 类,带有名字:
 
 {* ../../docs_src/python_types/tutorial010_py310.py hl[1:3] *}
 
-Then you can declare a variable to be of type `Person`:
+然后声明一个 `Person` 类型的变量:
 
 {* ../../docs_src/python_types/tutorial010_py310.py hl[6] *}
 
-And then, again, you get all the editor support:
+再次地,所有编辑器支持都到位了:
 
 <img src="/img/python-types/image06.png">
 
-Notice that this means "`one_person` is an **instance** of the class `Person`".
+注意,这表示"`one_person` 是 `Person` 类的一个**实例**",而不是"`one_person` 是名为 `Person` 的**类**"。
 
-It doesn't mean "`one_person` is the **class** called `Person`".
+## Pydantic 模型 { #pydantic-models }
 
-## Pydantic models { #pydantic-models }
+[Pydantic](https://pydantic.dev/docs/) 是一个执行数据校验的 Python 库。
 
-[Pydantic](https://pydantic.dev/docs/) is a Python library to perform data validation.
+你把数据的"形状"声明为带属性的类,每个属性都有类型。
 
-You declare the "shape" of the data as classes with attributes.
+然后用一些值创建该类的实例,它会校验这些值、将其转换为合适的类型(如需要),并返回一个携带全部数据的对象。
 
-And each attribute has a type.
+对这个结果对象,你能享受全部编辑器支持。
 
-Then you create an instance of that class with some values and it will validate the values, convert them to the appropriate type (if that's the case) and give you an object with all the data.
-
-And you get all the editor support with that resulting object.
-
-An example from the official Pydantic docs:
+一个来自 Pydantic 官方文档的例子:
 
 {* ../../docs_src/python_types/tutorial011_py310.py *}
 
 /// note
 
-To learn more about [Pydantic, check its docs](https://pydantic.dev/docs/).
+想了解更多,请查阅 [Pydantic 文档](https://pydantic.dev/docs/)。
 
 ///
 
-**FastAPI** is all based on Pydantic.
+**FastAPI** 完全基于 Pydantic。
 
-You will see a lot more of all this in practice in the [Tutorial - User Guide](tutorial/index.md).
+你会在[教程 - 用户指南](tutorial/index.md)里看到更多实际用法。
 
-## Type Hints with Metadata Annotations { #type-hints-with-metadata-annotations }
+## 带元数据注解的类型提示 { #type-hints-with-metadata-annotations }
 
-Python also has a feature that allows putting **additional <dfn title="Data about the data, in this case, information about the type, e.g. a description.">metadata</dfn>** in these type hints using `Annotated`.
+Python 还支持用 `Annotated` 在类型提示中附加**额外的<dfn title="Data about the data, in this case, information about the type, e.g. a description.">元数据</dfn>**。
 
-You can import `Annotated` from `typing`.
+从 `typing` 导入 `Annotated`:
 
 {* ../../docs_src/python_types/tutorial013_py310.py hl[1,4] *}
 
-Python itself doesn't do anything with this `Annotated`. And for editors and other tools, the type is still `str`.
+Python 本身对 `Annotated` 不会做任何事。对编辑器和其他工具而言,类型依然是 `str`。
 
-But you can use this space in `Annotated` to provide **FastAPI** with additional metadata about how you want your application to behave.
+但你可以利用 `Annotated` 里的这个空间,向 **FastAPI** 提供关于应用行为的额外元数据。
 
-The important thing to remember is that **the first *type parameter*** you pass to `Annotated` is the **actual type**. The rest, is just metadata for other tools.
+关键是记住:**传给 `Annotated` 的第一个*类型参数***才是**实际类型**,其余的只是给其他工具用的元数据。
 
-For now, you just need to know that `Annotated` exists, and that it's standard Python. 😎
+现在你只需知道 `Annotated` 存在,而且它是标准 Python。😎
 
-Later you will see how **powerful** it can be.
+之后你会看到它有多**强大**。
 
 /// tip
 
-The fact that this is **standard Python** means that you will still get the **best possible developer experience** in your editor, with the tools you use to analyze and refactor your code, etc. ✨
+它是**标准 Python**,意味着你在编辑器里、在分析和重构代码的工具中,仍然能获得**最好的开发体验**。✨
 
-And also that your code will be very compatible with many other Python tools and libraries. 🚀
+你的代码也能与众多其他 Python 工具和库高度兼容。🚀
 
 ///
 
-## Type hints in **FastAPI** { #type-hints-in-fastapi }
+## **FastAPI** 中的类型提示 { #type-hints-in-fastapi }
 
-**FastAPI** takes advantage of these type hints to do several things.
+**FastAPI** 利用这些类型提示完成很多事情。
 
-With **FastAPI** you declare parameters with type hints and you get:
+用 **FastAPI** 声明带类型提示的参数,你能得到:
 
-* **Editor support**.
-* **Type checks**.
+* **编辑器支持**。
+* **类型检查**。
 
-...and **FastAPI** uses the same declarations to:
+……而 **FastAPI** 用同样的声明来:
 
-* **Define requirements**: from request path parameters, query parameters, headers, bodies, dependencies, etc.
-* **Convert data**: from the request to the required type.
-* **Validate data**: coming from each request:
-    * Generating **automatic errors** returned to the client when the data is invalid.
-* **Document** the API using OpenAPI:
-    * which is then used by the automatic interactive documentation user interfaces.
+* **定义要求**:来自请求的路径参数、查询参数、请求头、请求体、依赖等。
+* **转换数据**:把请求数据转换成所需的类型。
+* **校验数据**:来自每个请求的数据:
+    * 数据无效时自动生成**错误信息**返回给客户端。
+* 使用 OpenAPI **生成文档**:
+    * 随后被自动交互式文档界面使用。
 
-This might all sound abstract. Don't worry. You'll see all this in action in the [Tutorial - User Guide](tutorial/index.md).
+这些听起来可能很抽象。别担心,你会在[教程 - 用户指南](tutorial/index.md)里看到它们全部落地。
 
-The important thing is that by using standard Python types, in a single place (instead of adding more classes, decorators, etc), **FastAPI** will do a lot of the work for you.
+重点是:只使用标准 Python 类型、只写在一个地方(不用添加更多类、装饰器等),**FastAPI** 就会替你完成大量工作。
 
 /// note
 
-If you already went through all the tutorial and came back to see more about types, a good resource is [the "cheat sheet" from `mypy`](https://mypy.readthedocs.io/en/latest/cheat_sheet_py3.html).
+如果你已经读完整个教程、回来想深入了解类型,[`mypy` 的"速查表"](https://mypy.readthedocs.io/en/latest/cheat_sheet_py3.html)是不错的资源。
 
 ///
